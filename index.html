@@ -11,179 +11,290 @@
     <header class="header">
         <nav class="navbar">
             <div class="container">
-                <div class="logo">
-                    <i class="fas fa-cog"></i>
-                    <span>METALOPRERADA<br><strong>RAJEVIĆ</strong></span>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">POČETNA</a></li>
-                    <li><a href="#about">O NAMA</a></li>
-                    <li><a href="#services">USLUGE</a></li>
-                    <li><a href="#gallery">GALERIJA</a></li>
-                    <li><a href="#contact">KONTAKT</a></li>
+                <a class="logo" href="/" data-page="home">
+                    <img src="logo.png" alt="Metaloprerada Rajević logo">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/" data-page="home">POČETNA</a></li>
+                    <li><a href="/test1" data-page="test1">TEST 1</a></li>
+                    <li><a href="/test2" data-page="test2">TEST 2</a></li>
+                    <li><a href="/test3" data-page="test3">TEST 3</a></li>
                 </ul>
-                <button class="cta-header">ZATRAŽI PONUDU</button>
+                <button class="cta-header" type="button" data-scroll-target="contact">ZATRAŽI PONUDU</button>
             </div>
         </nav>
     </header>
 
-    <main>
-        <!-- HERO SEKCIJA -->
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <p class="hero-label">KVALITET KOJI TRAJE</p>
-                    <h1>METALOPRERADA<br><span class="highlight">RAJEVIĆ</span></h1>
-                    <p class="hero-description">Precizna izrada metalnih konstrukcija,<br>brza isporuka i Kvalitet bez kompromisa.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary">NAŠE USLUGE <i class="fas fa-arrow-right"></i></button>
-                        <button class="btn btn-secondary"><i class="fas fa-phone"></i> KONTAKTIRAJTE NAS</button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="placeholder-image">
-                        <i class="fas fa-cut"></i>
-                        <p>Slika obrade metala</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- HAMBURGER MENI - VAN HEADERA DA OSTANE IZNAD MOBILE OVERLAY-A -->
+    <button class="hamburger" id="hamburger" type="button" aria-label="Otvori meni" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </button>
 
-        <!-- O NAMA SEKCIJA -->
-        <section id="about" class="about">
-            <div class="container">
-                <h2>Ko smo mi?</h2>
-                <p class="section-intro">Metaloprerada Rajević je firma specijalizovana za obrade metalnih konstrukcija. Sa iskušenjem i kvalitetom bez kompromisa, omogućavamo utiskom izuzetnog kvaliteta i ponuditi.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>ISKUSTVO</h3>
-                        <p>Višegodišnjako iskustvo u metalnoj industriji sa zadovoljnim klijentima.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>PRECIZNOST</h3>
-                        <p>Kontrola izvršavanja sa skrupuloznom preciznom kvalitet i završenih proizvoda.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>KVALITET</h3>
-                        <p>Garantujemo kvalitet i posjedujemo svih prihvatljivih proizvoda.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>BRZA ISPORUKA</h3>
-                        <p>Pohvaljujem smo brzu isporuku objekata i ažuriranja kapaciteta.</p>
-                    </div>
-                </div>
+    <!-- MOBILE MENI FULLSCREEN -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <ul class="mobile-nav">
+            <li><a href="/" data-page="home">POČETNA</a></li>
+            <li><a href="/test1" data-page="test1">TEST 1</a></li>
+            <li><a href="/test2" data-page="test2">TEST 2</a></li>
+            <li><a href="/test3" data-page="test3">TEST 3</a></li>
+        </ul>
+    </div>
 
-                <button class="btn btn-primary">SAZNAJ VIŠE <i class="fas fa-arrow-right"></i></button>
-            </div>
-        </section>
-
-        <!-- USLUGE SEKCIJA -->
-        <section id="services" class="services">
-            <div class="container">
-                <h2>Šta radimo?</h2>
-                
-                <div class="services-grid">
-                    <div class="service-item">
-                        <div class="service-icon">
+    <main id="app">
+        <!-- HOME STRANICA -->
+        <section id="page-home" class="page active">
+            <!-- HERO SEKCIJA -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <p class="hero-label">KVALITET KOJI TRAJE</p>
+                        <h1>METALOPRERADA<br><span class="highlight">RAJEVIĆ</span></h1>
+                        <p class="hero-description">Precizna izrada metalnih konstrukcija,<br>brza isporuka i Kvalitet bez kompromisa.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" type="button" data-scroll-target="services">NAŠE USLUGE <i class="fas fa-arrow-right"></i></button>
+                            <button class="btn btn-secondary" type="button" data-scroll-target="contact"><i class="fas fa-phone"></i> KONTAKTIRAJTE NAS</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="placeholder-image">
                             <i class="fas fa-cut"></i>
+                            <p>Slika obrade metala</p>
                         </div>
-                        <h3>SEČENJE METALA</h3>
-                        <p>Lasersko sečenje inovativnim vrstama preciznosti po svim zahjevima.</p>
                     </div>
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-hammer"></i>
+                </div>
+            </section>
+
+            <!-- O NAMA SEKCIJA -->
+            <section class="about" id="about">
+                <div class="container">
+                    <h2>Ko smo mi?</h2>
+                    <p class="section-intro">Metaloprerada Rajević je firma specijalizovana za obradu metalnih konstrukcija. Radimo precizno, pouzdano i sa kvalitetom bez kompromisa.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>ISKUSTVO</h3>
+                            <p>Višegodišnje iskustvo u metalnoj industriji.</p>
                         </div>
-                        <h3>SAVIJANJE</h3>
-                        <p>Savijanje inovne na CNC masinama sa velikom tačnošću.</p>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>PRECIZNOST</h3>
+                            <p>Precizna izrada i kontrola kvaliteta u svakoj fazi rada.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>KVALITET</h3>
+                            <p>Garantujemo kvalitet u svim proizvodima.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>BRZA ISPORUKA</h3>
+                            <p>Poštujemo dogovorene rokove i obezbeđujemo pouzdanu isporuku.</p>
+                        </div>
                     </div>
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-fire"></i>
+                </div>
+            </section>
+
+            <!-- GALERIJA SEKCIJA -->
+            <section class="gallery" id="gallery">
+                <div class="container">
+                    <h2>Naši radovi</h2>
+                    <p class="gallery-intro">Pogledajte neke od naših projekata i uverite se u kvalitet izrade.</p>
+
+                    <div class="gallery-slider">
+                        <button class="gallery-btn prev" type="button" aria-label="Prethodna slika">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <div class="gallery-track">
+                            <div class="gallery-item">
+                                <div class="gallery-placeholder">Slika 1</div>
+                            </div>
+                            <div class="gallery-item">
+                                <div class="gallery-placeholder">Slika 2</div>
+                            </div>
+                            <div class="gallery-item">
+                                <div class="gallery-placeholder">Slika 3</div>
+                            </div>
+                            <div class="gallery-item">
+                                <div class="gallery-placeholder">Slika 4</div>
+                            </div>
+                            <div class="gallery-item">
+                                <div class="gallery-placeholder">Slika 5</div>
+                            </div>
                         </div>
-                        <h3>ZAVARIVANJE</h3>
-                        <p>Profesionalno zavarivanje konstrukcija od čelika inox i aluminijuma.</p>
+
+                        <button class="gallery-btn next" type="button" aria-label="Sledeća slika">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <h3>MAŠINSKA OBRADA</h3>
-                        <p>Glodanje, struganje i druge precizne mašinalne obrade metala.</p>
+
+                    <div class="gallery-dots" aria-label="Navigacija galerije">
+                        <button class="dot active" type="button" data-index="0" aria-label="Prikaži sliku 1"></button>
+                        <button class="dot" type="button" data-index="1" aria-label="Prikaži sliku 2"></button>
+                        <button class="dot" type="button" data-index="2" aria-label="Prikaži sliku 3"></button>
+                        <button class="dot" type="button" data-index="3" aria-label="Prikaži sliku 4"></button>
+                        <button class="dot" type="button" data-index="4" aria-label="Prikaži sliku 5"></button>
                     </div>
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-cube"></i>
+                </div>
+            </section>
+
+            <!-- USLUGE SEKCIJA -->
+            <section class="services" id="services">
+                <div class="container">
+                    <h2>Šta radimo?</h2>
+                    
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h3>SEČENJE METALA</h3>
+                            <p>Lasersko sečenje sa visokom preciznošću.</p>
                         </div>
-                        <h3>IZRADA KONSTRUKCIJA</h3>
-                        <p>Izrada metalnih konstrukcija po meri za različite namene i industrije.</p>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-hammer"></i>
+                            </div>
+                            <h3>SAVIJANJE</h3>
+                            <p>CNC savijanje sa velikom tačnošću.</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>ZAVARIVANJE</h3>
+                            <p>Profesionalno zavarivanje čelika, inoxa i aluminijuma.</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3>MAŠINSKA OBRADA</h3>
+                            <p>Precizno glodanje, struganje i druga mašinska obrada metala.</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h3>IZRADA KONSTRUKCIJA</h3>
+                            <p>Izrada metalnih konstrukcija po meri.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- TEST 1 STRANICA -->
+        <section id="page-test1" class="page">
+            <div class="test-page">
+                <div class="container">
+                    <h1>TEST 1 - PORTFOLIO</h1>
+                    <div class="test-content">
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <h2>Naši projekti</h2>
+                            <p>Ovdje su prikazani naši dosadašnji uspješni projekti u metalopreradi.</p>
+                            <p>Svaki projekt je rađen sa preciznošću i kvalitetom koji odgovaraju standardima.</p>
+                        </div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h2>Nagrade</h2>
+                            <p>Više puta nagrađeni za kvalitet i inovaciju u industriji.</p>
+                        </div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h2>Timovi</h2>
+                            <p>Naš tim stručnjaka radi sa dedikacijom na svakom projektu.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- GALERIJA SEKCIJA -->
-        <section id="gallery" class="gallery">
-            <div class="container">
-                <h2>Naši radovi</h2>
-                <p class="gallery-intro">Pogledajte neke od naših projekata i uvjerite se u kvalitet naših radova.</p>
-                
-                <div class="gallery-slider">
-                    <button class="gallery-btn prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    
-                    <div class="gallery-track">
-                        <div class="gallery-item">
-                            <div class="gallery-placeholder">Slika 1</div>
+        <!-- TEST 2 STRANICA -->
+        <section id="page-test2" class="page">
+            <div class="test-page">
+                <div class="container">
+                    <h1>TEST 2 - TEHNOLOGIJE</h1>
+                    <div class="test-content">
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h2>CNC Mašine</h2>
+                            <p>Koristi najnoviju CNC tehnologiju za preciznu obradu.</p>
                         </div>
-                        <div class="gallery-item">
-                            <div class="gallery-placeholder">Slika 2</div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h2>Automatizacija</h2>
+                            <p>Puno automatizovani procesi za bržu produkciju.</p>
                         </div>
-                        <div class="gallery-item">
-                            <div class="gallery-placeholder">Slika 3</div>
-                        </div>
-                        <div class="gallery-item">
-                            <div class="gallery-placeholder">Slika 4</div>
-                        </div>
-                        <div class="gallery-item">
-                            <div class="gallery-placeholder">Slika 5</div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <h2>Kontrola Kvaliteta</h2>
+                            <p>Laboratorijska kontrola na svakom stepenu proizvodnje.</p>
                         </div>
                     </div>
-                    
-                    <button class="gallery-btn next">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
                 </div>
+            </div>
+        </section>
 
-                <div class="gallery-dots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
-                    <span class="dot" data-index="3"></span>
-                    <span class="dot" data-index="4"></span>
+        <!-- TEST 3 STRANICA -->
+        <section id="page-test3" class="page">
+            <div class="test-page">
+                <div class="container">
+                    <h1>TEST 3 - KONTAKT & LOKACIJA</h1>
+                    <div class="test-content">
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h2>Lokacija</h2>
+                            <p>Nikole Tesle 23<br>32000 Čačak, Srbija</p>
+                        </div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h2>Telefon</h2>
+                            <p>+381 64 123 45 67</p>
+                        </div>
+                        <div class="test-card">
+                            <div class="test-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h2>Email</h2>
+                            <p>info@metalprerada-rajevic.rs</p>
+                        </div>
+                    </div>
                 </div>
-
-                <button class="btn btn-primary gallery-link">POGLEDAJ GALERIJU <i class="fas fa-arrow-right"></i></button>
             </div>
         </section>
     </main>
 
     <!-- FOOTER -->
-    <footer id="contact" class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
@@ -191,31 +302,19 @@
                         <i class="fas fa-cog"></i>
                         <span>METALOPRERADA<br><strong>RAJEVIĆ</strong></span>
                     </div>
-                    <p>Pouzdalni partner za sve vrste potreba u metalopreradi. Kvalitet, preciznost i zadovoljstvo klijenta su naše prednosti.</p>
+                    <p>Pouzdalni partner za sve vrste potreba u metalopreradi.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                
-                <div class="footer-col">
-                    <h4>NAVIGACIJA</h4>
-                    <ul>
-                        <li><a href="#home">Početna</a></li>
-                        <li><a href="#about">O nama</a></li>
-                        <li><a href="#services">Usluge</a></li>
-                        <li><a href="#gallery">Galerija</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
-                    </ul>
-                </div>
-                
                 <div class="footer-col">
                     <h4>USLUGE</h4>
                     <ul>
                         <li><a href="#">Sečenje metala</a></li>
                         <li><a href="#">Savijanje</a></li>
-                        <li><a href="#">Mašinska obrada</a></li>
+                        <li><a href="#">Zavarivanje</a></li>
                         <li><a href="#">Izrada konstrukcija</a></li>
                     </ul>
                 </div>
@@ -224,16 +323,12 @@
                     <h4>KONTAKT</h4>
                     <p><i class="fas fa-phone"></i> +381 64 123 45 67</p>
                     <p><i class="fas fa-envelope"></i> info@metalprerada-rajevic.rs</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nikole Tesle 23, 32000 Čačak, Srbija</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nikole Tesle 23, Čačak</p>
                 </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Metaloprerada Rajević. Sva prava zadržana.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

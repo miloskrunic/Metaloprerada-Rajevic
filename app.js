@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initScrollButtons(router, closeMobileMenu);
-    initGallery();
     initRevealAnimations();
 });
 
@@ -182,62 +181,6 @@ function initScrollButtons(router, closeMobileMenu) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        });
-    });
-}
-
-function initGallery() {
-    const galleryTrack = document.querySelector('.gallery-track');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.gallery-btn.prev');
-    const nextBtn = document.querySelector('.gallery-btn.next');
-
-    if (!galleryTrack || !prevBtn || !nextBtn || galleryItems.length === 0) {
-        return;
-    }
-
-    let currentIndex = 0;
-
-    const updateGallery = () => {
-        const gap = parseFloat(window.getComputedStyle(galleryTrack).columnGap) || 24;
-        const itemWidth = galleryItems[0].offsetWidth + gap;
-        galleryTrack.scrollTo({
-            left: currentIndex * itemWidth,
-            behavior: 'smooth'
-        });
-
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
-    };
-
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % galleryItems.length;
-        updateGallery();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-        updateGallery();
-    });
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            currentIndex = Number(dot.dataset.index);
-            updateGallery();
-        });
-    });
-
-    let resizeFrame = null;
-    window.addEventListener('resize', () => {
-        if (resizeFrame) {
-            window.cancelAnimationFrame(resizeFrame);
-        }
-
-        resizeFrame = window.requestAnimationFrame(() => {
-            updateGallery();
-            resizeFrame = null;
         });
     });
 }

@@ -243,7 +243,7 @@ function initGallery() {
 }
 
 function initRevealAnimations() {
-    const animatedElements = document.querySelectorAll('.feature-card, .gallery-item, .service-item, .test-card');
+    const animatedElements = document.querySelectorAll('.feature-card, .service-item, .test-card');
 
     if (!('IntersectionObserver' in window)) {
         animatedElements.forEach(element => {

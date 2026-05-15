@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.vscode/settings.json
+dist/
+build/
+README.md

@@ -46,12 +46,7 @@ class Router {
     }
 
     getBasePath() {
-        const path = window.location.pathname;
-
-        if (
-            window.location.hostname.endsWith('github.io') &&
-            (path === this.githubPagesBasePath || path.startsWith(`${this.githubPagesBasePath}/`))
-        ) {
+        if (window.location.hostname.endsWith('github.io')) {
             return this.githubPagesBasePath;
         }
 

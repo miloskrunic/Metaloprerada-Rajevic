@@ -1,12 +1,19 @@
 // ===== SPA ROUTER =====
 class Router {
     constructor() {
+        this.githubPagesBasePath = '/Metaloprerada-Rajevic';
+        this.basePath = this.getBasePath();
         this.routes = {
             '/': 'home',
             '/index.html': 'home',
-            '/test1': 'test1',
-            '/test2': 'test2',
-            '/test3': 'test3'
+            '/radovi': 'radovi',
+            '/resenja': 'resenja',
+            '/kontakt': 'kontakt'
+        };
+        this.legacyRoutes = {
+            '/test1': '/radovi',
+            '/test2': '/resenja',
+            '/test3': '/kontakt'
         };
 
         this.currentPage = 'home';
@@ -15,46 +22,117 @@ class Router {
 
     init() {
         document.querySelectorAll('[data-page]').forEach(link => {
+            const routePath = this.normalizePath(link.getAttribute('href'));
+            link.setAttribute('href', this.getPublicPath(routePath));
+
             link.addEventListener('click', event => {
                 event.preventDefault();
-                const page = link.dataset.page;
                 const path = link.getAttribute('href');
-                this.navigate(path, page);
+                this.navigate(path);
             });
         });
 
         window.addEventListener('popstate', event => {
-            const path = event.state?.path || window.location.pathname || '/';
+            const path = this.normalizePath(event.state?.path || window.location.pathname || '/');
             const page = this.routes[path] || 'home';
             this.showPage(page);
         });
 
-        const initialPath = this.normalizePath(window.location.pathname);
+        const fallbackPath = this.consumeFallbackRedirect();
+        const initialPath = this.normalizePath(fallbackPath || window.location.pathname);
         const initialPage = this.routes[initialPath] || 'home';
         this.showPage(initialPage);
         this.replaceHistory(initialPath);
     }
 
-    normalizePath(path) {
-        if (!path || path === '/' || path.endsWith('/index.html')) {
+    getBasePath() {
+        const path = window.location.pathname;
+
+        if (
+            window.location.hostname.endsWith('github.io') &&
+            (path === this.githubPagesBasePath || path.startsWith(`${this.githubPagesBasePath}/`))
+        ) {
+            return this.githubPagesBasePath;
+        }
+
+        return '';
+    }
+
+    consumeFallbackRedirect() {
+        try {
+            const redirectUrl = window.sessionStorage.getItem('spaRedirect');
+
+            if (!redirectUrl) {
+                return null;
+            }
+
+            window.sessionStorage.removeItem('spaRedirect');
+            const parsedUrl = new URL(redirectUrl);
+
+            if (parsedUrl.origin !== window.location.origin) {
+                return null;
+            }
+
+            return parsedUrl.pathname;
+        } catch (error) {
+            console.warn('SPA fallback redirect nije dostupan.', error);
+            return null;
+        }
+    }
+
+    stripBasePath(path) {
+        if (!path) {
             return '/';
         }
 
-        return this.routes[path] ? path : '/';
+        let routePath = path;
+
+        if (this.basePath && routePath === this.basePath) {
+            return '/';
+        }
+
+        if (this.basePath && routePath.startsWith(`${this.basePath}/`)) {
+            routePath = routePath.slice(this.basePath.length);
+        }
+
+        if (!routePath.startsWith('/')) {
+            routePath = `/${routePath}`;
+        }
+
+        return routePath;
     }
 
-    navigate(path, page) {
-        if (!page || !this.routes[path]) {
+    normalizePath(path) {
+        let routePath = this.stripBasePath(path).replace(/\/+$/, '') || '/';
+
+        if (routePath === '/index.html' || routePath.endsWith('/index.html')) {
+            routePath = '/';
+        }
+
+        if (this.legacyRoutes[routePath]) {
+            return this.legacyRoutes[routePath];
+        }
+
+        return this.routes[routePath] ? routePath : '/';
+    }
+
+    navigate(path) {
+        const routePath = this.normalizePath(path);
+        const routePage = this.routes[routePath];
+
+        if (!routePage) {
+            this.replaceHistory('/');
+            this.showPage('home');
             return;
         }
 
-        if (this.currentPage !== page) {
-            this.pushHistory(path);
-            this.showPage(page);
+        if (this.currentPage !== routePage) {
+            this.pushHistory(routePath);
+            this.showPage(routePage);
             return;
         }
 
-        this.pushHistory(path);
+        this.pushHistory(routePath);
     }
 
     showPage(page) {
@@ -79,21 +157,33 @@ class Router {
         });
     }
 
+    getPublicPath(path) {
+        if (!this.basePath) {
+            return path;
+        }
+
+        return path === '/' ? `${this.basePath}/` : `${this.basePath}${path}`;
+    }
+
     pushHistory(path) {
-        if (window.location.pathname === path) {
+        const publicPath = this.getPublicPath(path);
+
+        if (window.location.pathname === publicPath) {
             return;
         }
 
         try {
-            window.history.pushState({ path }, '', path);
+            window.history.pushState({ path }, '', publicPath);
         } catch (error) {
             console.warn('History API nije dostupan za ovu putanju.', error);
         }
     }
 
     replaceHistory(path) {
+        const publicPath = this.getPublicPath(path);
+
         try {
-            window.history.replaceState({ path }, '', path);
+            window.history.replaceState({ path }, '', publicPath);
         } catch (error) {
             console.warn('History API nije dostupan za ovu putanju.', error);
         }
@@ -170,7 +260,7 @@ function initScrollButtons(router, closeMobileMenu) {
             const targetId = button.dataset.scrollTarget;
 
             if (router.currentPage !== 'home') {
-                router.navigate('/', 'home');
+                router.navigate('/');
             }
 
             closeMobileMenu();

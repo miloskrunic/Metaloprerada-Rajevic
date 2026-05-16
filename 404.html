@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preusmeravanje...</title>
+</head>
+<body>
+    <script>
+        (function () {
+            var githubPagesBasePath = '/Metaloprerada-Rajevic/';
+            var targetBase = window.location.hostname.endsWith('github.io') ? githubPagesBasePath : '/';
+
+            try {
+                window.sessionStorage.setItem('spaRedirect', window.location.href);
+            } catch (error) {
+                window.location.replace(targetBase);
+                return;
+            }
+
+            window.location.replace(targetBase);
+        }());
+    </script>
+    <p>Preusmeravanje...</p>
+</body>
+</html>
